@@ -1,7 +1,12 @@
 import React from 'react';
+import {Translate} from 'uiex/Translate';
 
 export class Home extends React.PureComponent {
 	render() {
-		return 111
+		return (
+			<Translate>
+				travel
+			</Translate>
+		)
 	}
 }
