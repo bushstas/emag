@@ -1,7 +1,8 @@
 <?php
 
 $data = array(
-	"travel" => "Искать приключения"
+	"travel" => "Искать приключения",
+	"start" => "Начать"
 );
 
 die(json_encode($data));
