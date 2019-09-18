@@ -1,8 +1,14 @@
 <?php
 
 $data = array(
-	"travel" => "Искать приключения",
-	"start" => "Начать"
+	'ru' => array(
+		"travel" => "Искать приключения",
+		"start" => "Начать"
+	),
+	'eng' => array(
+		"travel" => "Do some travel",
+		"start" => "Start this"
+	)
 );
 
 die(json_encode($data));

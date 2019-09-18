@@ -3,36 +3,48 @@ import {App} from 'uiex/App';
 import {AppPage} from 'uiex/AppPage';
 import {SideMenu} from 'uiex/SideMenu';
 import {AsyncLoader} from 'uiex/AsyncLoader';
+import {addTranslations} from 'uiex/Translate';
 import {Home} from 'pages/Home';
 import {Battle} from 'pages/Battle';
 
 import './style.scss';
 
+const TOKEN = 'fuhasuifasidhaisdh';
+const urls = [
+	'http://emag.ru/api/load.php',
+	`http://emag.ru/api/dictionary.php?lang=ru`
+];
+const addToStoreAs = ['user'];
+
 export default class Game extends React.Component {
 	state = {
-		lang: 'ru',
 		location: null
 	}
 
 	handleLoad = (data) => {
-		const {location} = data;
+		const [user, dictionary] = data;
+		if (dictionary) {
+			addTranslations(dictionary.ru, 'ru');
+			addTranslations(dictionary.eng, 'eng');
+		}
+		const {location} = user;
 		this.setState({location});
 	}
 
 	renderSideMenu = () => {
 		return (
 			<SideMenu width={150}>
-				111111
+				SideMenu
 			</SideMenu>
 		);
 	}
 
 	render() {
-		const {lang, location} = this.state;
+		const {location} = this.state;
 		return (
 			<AsyncLoader
-				url="http://emag.ru/api/load.php"
-				addToStoreAs="user"
+				url={urls}
+				addToStoreAs={addToStoreAs}
 				dataFieldName="data"
 				successFlagName="success"
 				onSuccess={this.handleLoad}
@@ -40,7 +52,6 @@ export default class Game extends React.Component {
 				<App
 					sideMenu={this.renderSideMenu()}
 					sideMenuWidth={150}
-					loadDictionaryUrl={`http://emag.ru/api/dictionary.php?lang=${lang}`}
 					hashRouting
 				>
 					<AppPage
